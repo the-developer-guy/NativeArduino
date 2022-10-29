@@ -11,3 +11,21 @@ But sometimes you just want to stay. STM32 HAL is wonderful, but many people get
 Yes, "just move to a bigger microcontroller" exists. I always encourage people to choose the right tool for the job like "don't use SoftwareSerial if you need 2 UART ports, use a board with enought peripherals", but most frameworks waste precious CPU time, untapped possibilites exist.
 
 The goal is to provide a usable driver pack for the common boards while explaining the depth of the hardware for those, who want to learn.
+
+## Example
+The builtin digitalWrite() function - while it's easy to use - has to do a lot of stuff to do. Way too much. Let's compare the speed of simple pin toggling:
+
+	void loop() {
+	  digitalWrite(13, HIGH);
+	  digitalWrite(13, LOW);
+	}
+
+VS.
+
+	void loop() {
+	  pinSet(PIN_13_PORT, PIN_13);
+	  pinClear(PIN_13_PORT, PIN_13);
+	}
+
+
+![measurement](https://github.com/the-developer-guy/NativeArduino/blob/main/Uno-pin-test.png?raw=true)
